@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 
-mongoose.connect('mongodb://localhost/joyride');
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect('mongodb://localhost/joyride');
+}
 
 const app = express();
 
