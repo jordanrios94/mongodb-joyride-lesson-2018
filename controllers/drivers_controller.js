@@ -1,8 +1,29 @@
 const Driver = require('../models/driver');
 
+const DEFAULT_DISTANCE = 200000;
+
+const geoNear = (lng, lat, distance = DEFAULT_DISTANCE) => ({
+  $geoNear: {
+    near: {
+      type: 'Point',
+      coordinates: [parseFloat(lng), parseFloat(lat)]
+    },
+    spherical: true,
+    distanceField: 'dist',
+    maxDistance: distance
+  }
+});
+
 module.exports = {
   greeting(req, res) {
     res.send({ hi: 'there' });
+  },
+  index(req, res, next) {
+    const { lng, lat } = req.query;
+
+    Driver.aggregate([geoNear(lng, lat)])
+      .then(drivers => res.send(drivers))
+      .catch(next);
   },
   create(req, res, next) {
     const driverProps = req.body;
