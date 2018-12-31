@@ -31,7 +31,7 @@ The node environment is now ready to go.
 
 ## Running the tests
 
-The test suite used is mocha. All the tests are covering the mongoose models created.
+The test suite used is mocha. All the tests are covering the express routes created and validating against a test database for assertions.
 
 To run tests, execute the following in the terminal.
 
