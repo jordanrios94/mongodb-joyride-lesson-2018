@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+// Standards - http://geojson.org/
 const PointSchema = new Schema({
   type: { type: String, default: 'Point' },
   coordinates: { type: [Number], index: '2dsphere' }
